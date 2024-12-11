@@ -1,0 +1,39 @@
+---
+# tasks file for cloudsend
+
+- name: cloud send tasks
+  tags: logging
+  block:
+  - name: Copy cloudsend
+    become: true
+    copy:
+      src: cloudsend.sh
+      dest: /usr/bin/cloudsend
+      mode: +x
+
+  # - name: Set cloudsend variable - url
+  #   lineinfile:
+  #     dest: ~/.bashrc
+  #     state: present
+  #     regexp: "^export CLOUDSEND_URL"
+  #     line: "export CLOUDSEND_URL={{ file_drop_url }}"
+
+  # - name: Set cloudsend variable - password
+  #   lineinfile:
+  #     dest: ~/.bashrc
+  #     state: present
+  #     regexp: "^export CLOUDSEND_PASSWORD"
+  #     line: "export CLOUDSEND_PASSWORD={{ password }}"
+
+  - name: Copy log_compress_and_send
+    become: true
+    copy:
+      src: log_compress_and_send.sh
+      dest: /usr/bin/log_compress_and_send
+      mode: +x
+
+  # - name: Create cron job - compress and send log
+  #   ansible.builtin.cron:
+  #     name: "compress and send processit log"
+  #     minute: "0"
+  #     job: "log_compress_and_send {{ log_path }}"
